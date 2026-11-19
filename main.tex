@@ -1,0 +1,99 @@
+% !TEX program = xelatex
+% NTU MAE MSc dissertation template.
+% Compile with XeLaTeX (Overleaf: Menu -> Settings -> Compiler -> XeLaTeX).
+% The title page uses fontspec + Arial, so pdfLaTeX will not work.
+\documentclass[11pt]{report}
+
+%% Useful packages
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{fontspec}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{notoccite}
+\usepackage{cite}
+\usepackage{courier}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}%提供float浮动环境
+\usepackage{booktabs}%提供命令\toprule、\midrule、\bottomrule
+\usepackage{setspace}
+\setstretch{1.5} % 添加这一行
+\usepackage{subfigure}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx} % Times 文本字体
+\usepackage{newtxmath} % Times 数学字体（覆盖默认数学符号）
+\setlength{\parindent}{0pt} % 取消段落缩进
+\usepackage{listings}
+\usepackage{bm}
+\usepackage{csquotes} 
+\usepackage[justification=centering]{caption}
+\usepackage{enumitem} % 用于自定义列表格式
+
+\usepackage{pdfpages}
+
+\setcounter{secnumdepth}{3} % 让编号深度到 subsubsection（3）
+
+% 自定义 \url 样式，使其与 \texttt{} 一致
+\urlstyle{tt}  % 使 \url 与 \texttt 字体一致
+\hypersetup{
+    urlcolor=black, % 将 \url 的颜色设置为黑色，与 \texttt{ } 字体一致
+    linkcolor=black % 设置所有链接颜色为黑色
+}
+
+\begin{document}
+
+%==== FRONT PART====
+% 1. 封面和声明页
+% 封面和声明页
+\include{Title/titlepage}
+% Signed Statement of Originality: upload your signed PDF as
+% PDFpage/statement.pdf and it replaces the placeholder page automatically.
+\IfFileExists{PDFpage/statement.pdf}%
+  {\includepdf[pages=-]{PDFpage/statement.pdf}}%
+  {\input{PDFpage/statement_placeholder}}
+
+% 目录（完全无页码）
+\pagenumbering{gobble}
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\clearpage
+
+% 摘要（罗马数字，从i开始）
+\pagenumbering{roman}
+\setcounter{page}{1}
+\include{Front/Abstract}
+
+\include{Front/Acknowledgement} 
+% Optional front matter (uncomment if needed):
+% \include{Front/Acronyms}
+% \include{Front/Symbols}
+\addcontentsline{toc}{chapter}{Lists of Figures}
+\listoffigures
+
+\listoftables 
+\addcontentsline{toc}{chapter}{Lists of Tables}
+\newpage
+
+%==== MAIN PART ====
+\pagenumbering{arabic}
+\include{Chapter1/Chapter1}
+\include{Chapter2/Chapter2}
+\include{Chapter3/Chapter3}
+\include{Chapter4/Chapter4}
+\include{Chapter5/Chapter5}
+\include{Chapter6/Chapter6}
+
+\renewcommand{\bibname}{References}
+\bibliographystyle{unsrt}
+\bibliography{Ref/references.bib}
+
+% Optional appendix (uncomment if needed):
+% \include{Appendix/appendix}
+
+\end{document}
